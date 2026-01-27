@@ -169,6 +169,13 @@ dto.setStatus("A Venda");
 
 ProdutosDAO dao = new ProdutosDAO();
 boolean ok = dao.cadastrarProduto(dto);
+
+if (ok) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+} else {
+    javax.swing.JOptionPane.showMessageDialog(this, "Erro ao cadastrar.");
+}
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
