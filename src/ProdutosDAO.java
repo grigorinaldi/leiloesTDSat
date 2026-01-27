@@ -1,42 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Adm
- */
-
-import java.sql.PreparedStatement;
 import java.sql.Connection;
-import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
+import java.sql.PreparedStatement;
 
 public class ProdutosDAO {
-    
-    Connection conn;
-    PreparedStatement prep;
-    ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
-    
-    public void cadastrarProduto (ProdutosDTO produto){
-        
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
-    }
-    
-    public ArrayList<ProdutosDTO> listarProdutos(){
-        
-        return listagem;
-    }
-    
-    
-    
-        
-}
 
+    public boolean cadastrarProduto(ProdutosDTO dto) {
+        String sql = "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)";
+
+        try (
+            Connection conn = new conectaDAO().conectaBD();
+            PreparedStatement pst = conn.prepareStatement(sql)
+        ) {
+
+            pst.setString(1, dto.getNome());
+            pst.setInt(2, dto.getValor());
+            pst.setString(3, dto.getStatus());
+
+            int rows = pst.executeUpdate();
+            return rows > 0;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+}
