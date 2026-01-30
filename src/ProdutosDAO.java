@@ -48,31 +48,28 @@ public class ProdutosDAO {
     }
 
     public ArrayList<ProdutosDTO> listarProdutosVendidos() {
-        String sql = "SELECT id, nome, valor, status FROM uc11.produtos";
-        ArrayList<ProdutosDTO> lista = new ArrayList<>();
+    String sql = "SELECT id, nome, valor, status FROM produtos WHERE status = 'Vendido'";
+    ArrayList<ProdutosDTO> lista = new ArrayList<>();
 
-        try {
-            Connection conn = new conectaDAO().conectaBD();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+    try {
+        Connection conn = new conectaDAO().conectaBD();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
 
-            while (rs.next()) {
-                ProdutosDTO dto = new ProdutosDTO();
-                dto.setId(rs.getInt("id"));
-                dto.setNome(rs.getString("nome"));
-                dto.setValor(rs.getInt("valor"));
-                dto.setStatus(rs.getString("status"));
-                lista.add(dto);
-            }
+        while (rs.next()) {
+            ProdutosDTO dto = new ProdutosDTO();
+            dto.setId(rs.getInt("id"));
+            dto.setNome(rs.getString("nome"));
+            dto.setValor(rs.getInt("valor"));
+            dto.setStatus(rs.getString("status"));
 
-            rs.close();
-            pst.close();
-            conn.close();
-
-        } catch (Exception e) {
-          
+            lista.add(dto);
         }
 
-        return lista;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
     }
 }
