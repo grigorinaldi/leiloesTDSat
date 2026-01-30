@@ -47,7 +47,7 @@ public class ProdutosDAO {
         }
     }
 
-    public ArrayList<ProdutosDTO> listarProdutos() {
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
         String sql = "SELECT id, nome, valor, status FROM uc11.produtos";
         ArrayList<ProdutosDTO> lista = new ArrayList<>();
 

@@ -15,7 +15,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     private void carregarTabela() {
     ProdutosDAO dao = new ProdutosDAO();
-    ArrayList<ProdutosDTO> lista = dao.listarProdutos();
+    ArrayList<ProdutosDTO> lista = dao.listarProdutosVendidos();
 
     DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
     model.setRowCount(0);
@@ -182,8 +182,8 @@ try {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+       vendasVIEW v = new vendasVIEW();
+        v.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
