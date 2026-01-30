@@ -4,6 +4,26 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ProdutosDAO {
+    
+    public boolean venderProduto(int id) {
+    String sql = "UPDATE uc11.produtos SET status = 'Vendido' WHERE id = ?";
+
+    try {
+        Connection conn = new conectaDAO().conectaBD();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, id);
+
+        int rows = pst.executeUpdate();
+
+        pst.close();
+        conn.close();
+
+        return rows > 0;
+    } catch (Exception e) {
+        return false;
+    }
+}
+
 
     public boolean cadastrarProduto(ProdutosDTO dto) {
         String sql = "INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)";

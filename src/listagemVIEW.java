@@ -155,11 +155,30 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
+try {
+        String txtId = id_produto_venda.getText().trim();
+
+        if (txtId.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Informe o ID do produto.");
+            return;
+        }
+
+        int id = Integer.parseInt(txtId);
+
         ProdutosDAO dao = new ProdutosDAO();
-        
+        boolean ok = dao.venderProduto(id);
+
+        if (ok) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Produto vendido!");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Não foi possível vender (ID não encontrado?).");
+        }
+
         carregarTabela();
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "ID inválido. Digite apenas números.");
+    }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
